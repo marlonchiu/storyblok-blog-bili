@@ -16,6 +16,7 @@ export default {
         version: process.env.NODE_ENV === 'production' ? 'published' : 'draft'
       })
       .then(res => {
+        console.log(res.data.story)
         return {
           blok: res.data.story.content,
           image: res.data.story.content.thumbnail,
@@ -23,6 +24,17 @@ export default {
           content: res.data.story.content.content
         }
       })
+  },
+  mounted () {
+    this.$storybridge.on(['input', 'published', 'change'], (event) => {
+      if (event.action === 'input') {
+        if (event.story.id === this.story.id) {
+          this.story.content = event.story.content
+        }
+      } else {
+        window.location.reload()
+      }
+    })
   }
 }
 </script>
