@@ -1,8 +1,8 @@
 <template>
   <div>
-    <TheHeader/>
+    <TheHeader />
     <main class="main-content">
-      <nuxt/>
+      <nuxt />
     </main>
   </div>
 </template>
@@ -25,6 +25,7 @@ export default {
 
 body {
   font-family: 'Lato', sans-serif;
+  margin: 0;
 }
 
 .main-content {

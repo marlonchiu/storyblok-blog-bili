@@ -17,54 +17,46 @@ export default {
   components: {
     PostPreview
   },
-  data() {
-    return {
-      posts: [
-        {
-          title: 'A new beginning',
-          previewText: "This will be awesome, don't miss it!",
-          thumbnailUrl:
-            'https://tinylaptop.net/wp-content/uploads/2016/12/best-laptop-for-programming.jpg',
-          id: 'a-new-beginning'
-        },
-        {
-          title: 'A second beginning',
-          previewText: "This will be awesome, don't miss it!",
-          thumbnailUrl:
-            'https://tinylaptop.net/wp-content/uploads/2016/12/best-laptop-for-programming.jpg',
-          id: 'a-second-beginning'
-        },
-        {
-          title: 'A new beginning',
-          previewText: "This will be awesome, don't miss it!",
-          thumbnailUrl:
-            'https://tinylaptop.net/wp-content/uploads/2016/12/best-laptop-for-programming.jpg',
-          id: 'a-new-beginning'
-        },
-        {
-          title: 'A second beginning',
-          previewText: "This will be awesome, don't miss it!",
-          thumbnailUrl:
-            'https://tinylaptop.net/wp-content/uploads/2016/12/best-laptop-for-programming.jpg',
-          id: 'a-second-beginning'
-        },
-        {
-          title: 'Paleo Pizza',
-          previewText: 'This will be awesome!',
-          thumbnailUrl:
-            'https://www.washingtonpost.com/resizer/M-WnldvRmvg3qyWg0Om8ssM6E3M=/1484x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/UM4VXMMJ5Y7T5MPQALWPL73RGM.jpg',
-          id: 'paleo-pizza'
-        },
-        {
-          title: 'Flatbread Pizza',
-          previewText: 'This will be awesome!',
-          thumbnailUrl:
-            'https://www.washingtonpost.com/resizer/M-WnldvRmvg3qyWg0Om8ssM6E3M=/1484x0/arc-anglerfish-washpost-prod-washpost.s3.amazonaws.com/public/UM4VXMMJ5Y7T5MPQALWPL73RGM.jpg',
-          id: 'flatbread-pizza'
+  asyncData(context) {
+    return context.app.$storyapi
+      .get('cdn/stories', {
+        version: context.isDev ? 'draft' : 'published',
+        starts_with: 'blog/'
+      })
+      .then(res => {
+        // console.log(res.data.stories)
+        return {
+          posts: res.data.stories.map((bp) =>{
+            return {
+              id: bp.slug,
+              title: bp.content.title,
+              previewText: bp.content.summary,
+              thumbnailUrl: bp.content.thumbnail
+            }
+          })
         }
-      ]
-    }
-  }
+      })
+  },
+  // data() {
+  //   return {
+  //     posts: [
+  //       {
+  //         title: 'A new beginning',
+  //         previewText: "This will be awesome, don't miss it!",
+  //         thumbnailUrl:
+  //           'https://tinylaptop.net/wp-content/uploads/2016/12/best-laptop-for-programming.jpg',
+  //         id: 'a-new-beginning'
+  //       },
+  //       {
+  //         title: 'A second beginning',
+  //         previewText: "This will be awesome, don't miss it!",
+  //         thumbnailUrl:
+  //           'https://tinylaptop.net/wp-content/uploads/2016/12/best-laptop-for-programming.jpg',
+  //         id: 'a-second-beginning'
+  //       }
+  //     ]
+  //   }
+  // }
 }
 </script>
 
