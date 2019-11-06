@@ -20,11 +20,3 @@ $ npm run generate
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
-
-## 项目介绍
-
-[Nuxt.js＆Storyblok - 建立一个完整的博客](https://www.bilibili.com/video/av21130191/)
-
-## 构建工具
-
-[Create Nuxt App](https://github.com/nuxt/create-nuxt-app)
