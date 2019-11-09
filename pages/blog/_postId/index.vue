@@ -13,7 +13,7 @@ export default {
   asyncData(context) {
     return context.app.$storyapi
       .get('cdn/stories/blog/' + context.params.postId, {
-        version: process.env.NODE_ENV === 'production' ? 'published' : 'draft'
+        version: 'draft'
       })
       .then(res => {
         console.log(res.data.story)
@@ -25,7 +25,7 @@ export default {
         }
       })
   },
-  mounted () {
+  mounted() {
     this.$storybridge.on(['input', 'published', 'change'], (event) => {
       if (event.action === 'input') {
         if (event.story.id === this.story.id) {
