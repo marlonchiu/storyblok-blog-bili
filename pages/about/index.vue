@@ -10,14 +10,14 @@ export default {
   asyncData(context) {
     return context.app.$storyapi
       .get('cdn/stories/about', {
-        version: context.isDev ? 'draft' : 'published'
+        version: 'draft',
       })
       .then(res => {
-        console.log(res.data.story)
+        // console.log(res.data.story)
         return {
           blok: res.data.story.content,
-          title: res.data.story.content.Title,
-          content: res.data.story.content.Content
+          title: res.data.story.content.title,
+          content: res.data.story.content.content
         }
       })
   },
